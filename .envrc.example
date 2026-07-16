@@ -1,0 +1,4 @@
+# Copy to .envrc, fill in secrets, then: direnv allow .
+PATH_add "$HOME/venvs/AI_Demo/bin"
+export DB_USER='sa'
+export OPENAI_API_KEY='sk-...'
