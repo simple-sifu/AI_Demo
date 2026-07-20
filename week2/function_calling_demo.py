@@ -149,7 +149,7 @@ def run_conversation(messages: List[Dict[str, str]], functions: List[Dict]) -> s
 
     # API Call
     response = client.responses.create(
-        model="gpt-4.1", input=messages, tools=functions, tool_choice="auto"
+        model="gpt-4o-mini", input=messages, tools=functions, tool_choice="auto"
     )
 
     tool_call = response.output[0]
@@ -172,7 +172,7 @@ def run_conversation(messages: List[Dict[str, str]], functions: List[Dict]) -> s
         )
 
         response = client.responses.create(
-            model="gpt-4.1", input=messages, tools=functions
+            model="gpt-4o-mini", input=messages, tools=functions
         )
 
         tool_call = response.output[0]
