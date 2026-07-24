@@ -12,7 +12,7 @@
 <img width="956" height="519" alt="Recursive Chunking" src="https://github.com/user-attachments/assets/0f2b273d-c2f7-4d92-9c45-3bf901007e6e" />
 
 
-## 4. Document Shared Chunking
+## 4. Document Structure-based Chunking
 <img width="989" height="556" alt="Document Structure based Chunking" src="https://github.com/user-attachments/assets/3059e0d1-a708-4a40-8eb2-0dd357983d3d" />
 
 
