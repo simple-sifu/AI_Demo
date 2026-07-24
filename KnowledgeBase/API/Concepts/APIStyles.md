@@ -69,4 +69,5 @@ The skill isn't knowing the styles. It's knowing **when each one earns its place
 | SSE | Server → client push | Feeds, notifications, LLM streaming |
 | Webhooks | Server → your endpoint | Event-driven integrations |
 
+<img width="569" height="730" alt="Screenshot 2026-07-23 at 11 15 44 AM" src="https://github.com/user-attachments/assets/b5e94fa6-4b7b-4adc-b3a7-495bee9bc9af" />
 
