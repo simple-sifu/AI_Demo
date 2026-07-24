@@ -207,7 +207,7 @@ print("PART 2: Computing Similarity Scores")
 print("="*80)
 
 # Create a search query - this is what a user might type
-query = "Users can't login after changing password"
+query = "How to make pizza"
 print(f"\nSearch Query: '{query}'")
 
 # -----------------------------------------------------------------------------
@@ -274,7 +274,8 @@ print("PART 3: Finding Most Similar Tickets")
 print("="*80)
 
 # Get top-5 most similar tickets
-top_k = 5
+top_k = 10
+threshold = 0.5
 
 # np.argsort() returns indices that would sort the array (ascending)
 # [::-1] reverses to get descending order (highest similarity first)
@@ -287,6 +288,10 @@ print("-" * 80)
 for rank, idx in enumerate(top_indices, 1):
     ticket = tickets[idx]
     score = similarities[idx]
+
+    # ADD THIS LINE: Skip results below threshold
+    if score < threshold:
+        continue
     
     print(f"\n#{rank} - Similarity: {score:.4f}")
     print(f"Ticket ID: {ticket['ticket_id']}")
@@ -440,6 +445,23 @@ for test_query in test_queries:
     print(f"  → Best match: {tickets[top_idx]['title']}")
     print(f"  → Similarity: {sims[top_idx]:.4f}")
 
+# Compare two queries
+query1 = "Login authentication failed"
+query2 = "Slow database performance"
+
+print("\n" + "="*80)
+print("COMPARING TWO QUERIES")
+print("="*80)
+
+for q in [query1, query2]:
+    response = client.embeddings.create(input=[q], model=embedding_model)
+    q_emb = np.array([response.data[0].embedding])
+    sims = cosine_similarity(q_emb, embeddings)[0]
+    top_idx = np.argmax(sims)
+    
+    print(f"\nQuery: '{q}'")
+    print(f"  Best match: {tickets[top_idx]['title']}")
+    print(f"  Score: {sims[top_idx]:.4f}")
 # ============================================================================
 # SUMMARY
 # ============================================================================
