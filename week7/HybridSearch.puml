@@ -2,14 +2,15 @@
 Dataset -> Dataset: filter (first 1000, US only)
 Dataset -> DataFrame: convert 
 DataFrame -> DataFrame: del dups, n/a fields
-DataFrame -> DataFrame: concat 3 fields
+DataFrame -> DataFrame: df[conbined_fields]
 DataFrame -> SparseModel: download model
 DataFrame -> SparseModel: embed(texts) 
 SparseModel --> DataFrame: df[sparse_embedding]
 DataFrame -> DenseModel: download model
 DataFrame -> DenseModel: embed(texts)
 DenseModel --> DataFrame: df[dense_embedding]
-QdrantClient -> QdrantClient: create collection from VectorParams, SparseVectorParms
+QdrantClient -> QdrantClient: create collection
 DataFrame -> PointStruct: combine Sparse, Dense Vectors
+PointStruct --> DataFrame: points 
 QdrantClient -> QdrantClient: upsert(collection_name, points)
 @enduml

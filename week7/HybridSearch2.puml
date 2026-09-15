@@ -1,0 +1,5 @@
+@startuml 
+SparseVector -> SparseModel: embed(queryText) 
+QueryDenseVector -> DenseModel: embed(queryText)
+QdrantClient -> QdrantClient: query_batch_points
+@enduml
