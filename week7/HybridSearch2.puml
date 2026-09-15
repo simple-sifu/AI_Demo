@@ -1,5 +1,9 @@
 @startuml 
-SparseVector -> SparseModel: embed(queryText) 
-QueryDenseVector -> DenseModel: embed(queryText)
-QdrantClient -> QdrantClient: query_batch_points
+user -> Search: queryText
+Search -> SparseModel: list(embed(queryText)) 
+Search -> DenseModel: list(embed(queryText))
+Search -> QdrantClient: query_batch_points
+Search <-- QdrantClient: search_results
+Search -> point: payload
+
 @enduml

@@ -1,16 +1,19 @@
 @startuml 
-Dataset -> Dataset: filter (first 1000, US only)
-Dataset -> DataFrame: convert 
-DataFrame -> DataFrame: del dups, n/a fields
-DataFrame -> DataFrame: df[conbined_fields]
-DataFrame -> SparseModel: download model
-DataFrame -> SparseModel: embed(texts) 
-SparseModel --> DataFrame: df[sparse_embedding]
-DataFrame -> DenseModel: download model
-DataFrame -> DenseModel: embed(texts)
+Dataset -> Dataset: loadDataset(), select(), filter() 
+Dataset -> DataFrame: to_pandas()
+DataFrame -> DataFrame: drop_duplicates(), dropna()
+DataFrame -> DataFrame: df[combined_fields]
+DataFrame -> DenseModel: TextEmbedding
+DenseModel -> DenseModel: download model
+DataFrame -> DenseModel: list(embed(product_texts)
 DenseModel --> DataFrame: df[dense_embedding]
+DataFrame -> SparseModel: sparseTextEmbedding
+SparseModel -> SparseModel: download model
+DataFrame -> SparseModel: list(embed(product_texts) 
+SparseModel --> DataFrame: df[sparse_embedding]
 QdrantClient -> QdrantClient: create collection
-DataFrame -> PointStruct: combine Sparse, Dense Vectors
-PointStruct --> DataFrame: points 
+DataFrame -> QdrantClient: df[dense_embedding], df[sparse_embedding], df[product_texts]
+QdrantClient -> PointStruct: vector(dense_vector, sparse_vector), payload(product)
+PointStruct --> QdrantClient: points
 QdrantClient -> QdrantClient: upsert(collection_name, points)
 @enduml
